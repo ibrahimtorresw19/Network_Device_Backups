@@ -1,0 +1,82 @@
+
+
+# ============================================
+# CONFIGURACIÓN COMPLETA PARA SW2
+# ============================================
+
+
+configure terminal
+ip domain name local.com
+hostname SW2
+ip ssh version 2
+enable secret cisco
+no logging console
+
+
+vlan 30
+vlan 40
+vlan 90
+vlan 120
+name blackhole
+exit
+
+username cisco privilege 15 secret cisco
+crypto key generate rsa modulus 2048
+
+interface Ethernet0/0
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ ip dhcp snooping limit rate 15
+exit
+interface Ethernet0/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ ip dhcp snooping limit rate 15
+exit
+interface Ethernet0/2
+ switchport trunk encapsulation dot1q
+switchport mode trunk
+ switchport trunk native vlan 90
+ 
+
+exit
+interface Ethernet0/3
+ description to port3.sandbox-backend
+ no switchport
+ ip address 10.10.20.174 255.255.255.0
+exit
+
+
+# Ethernet1/0 - VLAN 120 (Blackhole)
+interface range Ethernet1/0-3
+switchport mode access
+ switchport access vlan 120
+ shutdown
+exit
+
+
+
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+exit
+line vty 0 4
+ exec-timeout 0 0
+ login local
+ transport input ssh
+exit
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+service password-encryption
+exit
+copy running-config startup-config

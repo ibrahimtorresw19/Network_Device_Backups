@@ -1,0 +1,847 @@
+annotations:
+  - border_color: '#083EEE44'
+    border_style: ''
+    color: '#7607BD'
+    rotation: 0
+    text_bold: true
+    text_content: vlan10
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 3
+    type: text
+    x1: -320.0
+    y1: 240.0
+    z_index: 0
+  - border_color: '#2B034767'
+    border_style: ''
+    color: '#60058E'
+    rotation: 0
+    text_bold: true
+    text_content: vlan20
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 3
+    type: text
+    x1: -160.0
+    y1: 240.0
+    z_index: 1
+  - border_color: '#32828389'
+    border_style: ''
+    color: '#109EA4'
+    rotation: 0
+    text_bold: true
+    text_content: vlan30
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 3
+    type: text
+    x1: 0.0
+    y1: 240.0
+    z_index: 2
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#808080FF'
+    rotation: 0
+    text_bold: false
+    text_content: ''
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: 240.0
+    y1: 280.0
+    z_index: 3
+  - border_color: '#961E9359'
+    border_style: ''
+    color: '#088283'
+    rotation: 0
+    text_bold: true
+    text_content: vlan40
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 3
+    type: text
+    x1: 160.0
+    y1: 240.0
+    z_index: 4
+  - border_color: '#808080FF'
+    border_radius: 0
+    border_style: ''
+    color: '#ADEACF'
+    thickness: 4
+    type: rectangle
+    x1: -280.0
+    y1: -200.0
+    x2: 480.0
+    y2: 120.0
+    z_index: 5
+  - border_color: '#808080FF'
+    border_radius: 0
+    border_style: ''
+    color: '#CFDE98'
+    thickness: 4
+    type: rectangle
+    x1: -280.0
+    y1: -40.0
+    x2: 480.0
+    y2: 120.0
+    z_index: 6
+  - border_color: '#00000000'
+    border_style: ''
+    color: '#190303'
+    rotation: 0
+    text_bold: false
+    text_content: |-
+      Credentials: cisco / cisco
+      Protocol: ssh/telnet
+
+      | Device Name| OS        | IP Address   |
+      | ---------- | --------- | ------------ |
+      | R1         | IOL XE    | 10.10.20.171 |
+      | R2         | IOL XE    | 10.10.20.172 |
+      | SW1        | IOL L2 XE | 10.10.20.173 |
+      | SW2        | IOL L2 XE | 10.10.20.174 |
+      | Server1    | Linux     | 10.10.20.175 |
+      | Server2    | Linux     | 10.10.20.176 |
+      | PC1        | Linux     | 10.10.20.177 |
+      | PC2        | Linux     | 10.10.20.178 |
+    text_font: monospace
+    text_italic: false
+    text_size: 12
+    text_unit: pt
+    thickness: 1
+    type: text
+    x1: -760.0
+    y1: -80.0
+    z_index: 13
+nodes:
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: "Building configuration...\n\nCurrent configuration : 3905 bytes\n\
+          !\n! Last configuration change at 01:26:43 UTC Thu Oct 10 2024\n!\nversion\
+          \ 17.12\nservice timestamps debug datetime msec\nservice timestamps log\
+          \ datetime msec\n!\nhostname SW1\n!\nboot-start-marker\nboot-end-marker\n\
+          !\n!\nvrf definition Mgmt-intf\n !\n address-family ipv4\n exit-address-family\n\
+          !\nno logging console\nno aaa new-model\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\
+          !\n!\n!\nip audit notify log\nip audit po max-events 100\nip domain name\
+          \ virl.info\nip cef\nlogin on-success log\nno ipv6 cef\n!\n!\n!\n!\n!\n\
+          !\n!\nvtp domain virl.lab\nvtp mode transparent\nvtp version 1\nmultilink\
+          \ bundle-name authenticated\n!\ncrypto pki trustpoint TP-self-signed-131184643\n\
+          \ enrollment selfsigned\n subject-name cn=IOS-Self-Signed-Certificate-131184643\n\
+          \ revocation-check none\n rsakeypair TP-self-signed-131184643\n hash sha256\n\
+          !\n!\ncrypto pki certificate chain TP-self-signed-131184643\n certificate\
+          \ self-signed 01\n  3082032E 30820216 A0030201 02020101 300D0609 2A864886\
+          \ F70D0101 0B050030\n  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967\
+          \ 6E65642D 43657274\n  69666963 6174652D 31333131 38343634 33301E17 0D323431\
+          \ 30303931 37323933\n  345A170D 33343130 30393137 32393334 5A303031 2E302C06\
+          \ 03550403 0C25494F\n  532D5365 6C662D53 69676E65 642D4365 72746966 69636174\
+          \ 652D3133 31313834\n  36343330 82012230 0D06092A 864886F7 0D010101 05000382\
+          \ 010F0030 82010A02\n  82010100 9DACFA21 02B3FEA1 090799A3 43C40793 783CABCD\
+          \ A5D66549 614461FE\n  4549EC38 FF3517A9 B74E1665 53D46F5B EA315CD7 5C2A26E4\
+          \ 66109A00 F4016DE3\n  CADEFD8F FB918CD2 4787B4A3 80213D35 03EF56AB 4F2E976F\
+          \ AE5B3943 A4AAE809\n  768CA678 901D296C 7ADADC90 3A663C5F 71DBC49F 5B230566\
+          \ 6E1CA54D 1B9D81F1\n  3086E69F F8FC817E 9E5F4C1A 1572DB5F F1889C79 5AEF5A12\
+          \ 43FE7A8C 806D0C1E\n  52E3DADC 2EF17FDC C67577E0 26379DE7 8E1C171C 699857B5\
+          \ 0FD4DBD0 FDC213F5\n  C1D5B38D B6951C66 F0EA7B91 221FFD82 8AC03070 06AA66BD\
+          \ 9BF755C5 65841C90\n  1CE75540 DCF46058 133AF04E 5F1A961B 3B07D74D 53974724\
+          \ AEE2D690 FE7F50CF\n  F194C2B3 02030100 01A35330 51301D06 03551D0E 04160414\
+          \ EFA5461D CAAE4804\n  3FAFE8AF 3E5D392A AF1355D7 301F0603 551D2304 18301680\
+          \ 14EFA546 1DCAAE48\n  043FAFE8 AF3E5D39 2AAF1355 D7300F06 03551D13 0101FF04\
+          \ 05300301 01FF300D\n  06092A86 4886F70D 01010B05 00038201 01000D67 2A7A1E32\
+          \ B1E13EA3 78493B8E\n  6DD0CC7B 4B6B2814 8342758A 0CE3332E E2D29F52 D955F6DD\
+          \ AE45C3A8 E295F7D7\n  867AD1E9 4340E4B4 CD6FA5FE 72FC9FBC 2A00A8DD BD1A05AD\
+          \ 01380E79 BC5757CE\n  97FAAE81 65667CB3 AA67E319 9A3A5DB9 F858D097 4E7E2076\
+          \ 41BC3581 E3354F7C\n  26E8A6D5 033ACE35 CABF797E 6F1D0729 6A4C057F E66C8E6E\
+          \ F2562609 EF0984EA\n  4185135C 72C45ECB 9AAC549A 7D096B1C 5AC30136 27F27980\
+          \ 7D61C7D1 16540056\n  168B8BA3 9E86BAE0 4147D5B1 D083C1DA E3096B23 09EEF930\
+          \ 60254CCE 4A616A4F\n  898086A0 13E43143 7CDF77BB A306541A 4F0B304E 9C3E1F4F\
+          \ EF4A01E5 CA3BA064\n  01C12A68 AE6F7782 286CE633 05E93AC5 E9F2\n  \tquit\n\
+          !\n!\nmemory free low-watermark processor 80589\n!\n!\nspanning-tree mode\
+          \ pvst\nspanning-tree extend system-id\nenable password cisco\n!\nusername\
+          \ cisco privilege 15 password 0 cisco\n!\nvlan internal allocation policy\
+          \ ascending\n!\nvlan 10,20\nno cdp run\n!\n!\n!\n!\n!\ninterface Loopback0\n\
+          \ description to\n no ip address\n shutdown\n!\ninterface Ethernet0/0\n\
+          \ switchport access vlan 10\n switchport mode access\n!\ninterface Ethernet0/1\n\
+          \ switchport access vlan 20\n switchport mode access\n!\ninterface Ethernet0/2\n\
+          \ switchport access vlan 10\n switchport mode access\n!\ninterface Ethernet0/3\n\
+          \ description to port3.sandbox-backend\n no switchport\n vrf forwarding\
+          \ Mgmt-intf\n ip address 10.10.20.173 255.255.255.0\n!\nip forward-protocol\
+          \ nd\n!\n!\nip http server\nip http secure-server\nip ssh bulk-mode 131072\n\
+          ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr\nip\
+          \ ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr\nip route\
+          \ vrf Mgmt-intf 0.0.0.0 0.0.0.0 10.10.20.254\n!\n!\n!\n!\n!\n!\ncontrol-plane\n\
+          !\n!\n!\nline con 0\n exec-timeout 0 0\n logging synchronous\nline aux 0\n\
+          line vty 0 4\n exec-timeout 0 0\n login local\n transport input telnet ssh\n\
+          !\n!\nend"
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: SW1
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -200
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        slot: 3
+        type: physical
+      - id: i5
+        label: Ethernet1/0
+        slot: 4
+        type: physical
+      - id: i6
+        label: Ethernet1/1
+        slot: 5
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: "Building configuration...\n\nCurrent configuration : 3905 bytes\n\
+          !\n! Last configuration change at 01:26:51 UTC Thu Oct 10 2024\n!\nversion\
+          \ 17.12\nservice timestamps debug datetime msec\nservice timestamps log\
+          \ datetime msec\n!\nhostname SW2\n!\nboot-start-marker\nboot-end-marker\n\
+          !\n!\nvrf definition Mgmt-intf\n !\n address-family ipv4\n exit-address-family\n\
+          !\nno logging console\nno aaa new-model\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\
+          !\n!\n!\nip audit notify log\nip audit po max-events 100\nip domain name\
+          \ virl.info\nip cef\nlogin on-success log\nno ipv6 cef\n!\n!\n!\n!\n!\n\
+          !\n!\nvtp domain virl.lab\nvtp mode transparent\nvtp version 1\nmultilink\
+          \ bundle-name authenticated\n!\ncrypto pki trustpoint TP-self-signed-131184644\n\
+          \ enrollment selfsigned\n subject-name cn=IOS-Self-Signed-Certificate-131184644\n\
+          \ revocation-check none\n rsakeypair TP-self-signed-131184644\n hash sha256\n\
+          !\n!\ncrypto pki certificate chain TP-self-signed-131184644\n certificate\
+          \ self-signed 01\n  3082032E 30820216 A0030201 02020101 300D0609 2A864886\
+          \ F70D0101 0B050030\n  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967\
+          \ 6E65642D 43657274\n  69666963 6174652D 31333131 38343634 34301E17 0D323431\
+          \ 30303931 37323933\n  375A170D 33343130 30393137 32393337 5A303031 2E302C06\
+          \ 03550403 0C25494F\n  532D5365 6C662D53 69676E65 642D4365 72746966 69636174\
+          \ 652D3133 31313834\n  36343430 82012230 0D06092A 864886F7 0D010101 05000382\
+          \ 010F0030 82010A02\n  82010100 CC8958BF 530C350D 054F1C39 9CDDAF40 F3DED466\
+          \ EF7F0962 388C0390\n  CD558402 234E4495 B4A12BD7 756AB1FB 2E8AA8D3 EF0518FD\
+          \ 73DD5BEF C163E05D\n  79916D13 376FAEDD 2E23A773 94D38DD6 DCBD7AFF A9DDAF07\
+          \ 83B752DF 60082402\n  B612E33E 6998192A 8E3D3689 C753A498 79400967 1C626991\
+          \ 93A92F98 2FC35217\n  2F26A8AB 8ED69C3E A92DB65C 8BE28068 3C21CF34 40AAB543\
+          \ 65DD339E 642B9048\n  1382BD0F 02B8634B 5779819A 427B36E7 83E35FCD C59CF8BA\
+          \ D708E029 FE0A2EBA\n  AAEB1FA0 1CEB3A78 B1DE1787 2672FE9B A654518F 4C8F2E35\
+          \ 7AE5DFB0 482B9F1D\n  04C2640F E58B441E 82A883DE 986E0009 B0C64919 CEC8891C\
+          \ 8145C624 944141D8\n  85477FE9 02030100 01A35330 51301D06 03551D0E 04160414\
+          \ 734F04A9 B4D29C25\n  8E630457 6F96DA9B BB6FCC96 301F0603 551D2304 18301680\
+          \ 14734F04 A9B4D29C\n  258E6304 576F96DA 9BBB6FCC 96300F06 03551D13 0101FF04\
+          \ 05300301 01FF300D\n  06092A86 4886F70D 01010B05 00038201 010038FD E4C2D574\
+          \ FD377B80 C3A399F7\n  71C76EA2 337BC65D A1DFDCF8 C29907EF 14A7B1D1 02D74C0F\
+          \ 93557243 1206A236\n  A669F555 F4F3D644 98E412F9 E6ABC2A9 4FA7C2C6 AFD288FA\
+          \ DEA11118 A8030DED\n  8D23FB53 FA3689AA 9424A233 EB8A4ACB 91963786 AC6D8EA2\
+          \ 1EEED084 6F10FDB3\n  1C82028A 8F35E5B2 229613F3 4AF6C25F 2EC53472 E6BDC4B2\
+          \ 5079347A F4EB3F38\n  4DB8F902 1EA7C6F2 D317EC29 5CCE56B1 65C9D914 245BB26F\
+          \ C0D1FA00 EF409AB6\n  9786727B 5845C469 ACA8BC8D 0C9F4ED8 F1B2C6FD 28D35CA8\
+          \ 0A4E773C BBB7DA0B\n  B45A1C66 130FDBC8 CD0BF382 A7CA254E 47F71A10 63AC32E6\
+          \ BC108C5A E064EE26\n  F26B85E6 A1F5C39D A1F37C83 B6ABA73F B1A4\n  \tquit\n\
+          !\n!\nmemory free low-watermark processor 80589\n!\n!\nspanning-tree mode\
+          \ pvst\nspanning-tree extend system-id\nenable password cisco\n!\nusername\
+          \ cisco privilege 15 password 0 cisco\n!\nvlan internal allocation policy\
+          \ ascending\n!\nvlan 30,40\nno cdp run\n!\n!\n!\n!\n!\ninterface Loopback0\n\
+          \ description to\n no ip address\n shutdown\n!\ninterface Ethernet0/0\n\
+          \ switchport access vlan 30\n switchport mode access\n!\ninterface Ethernet0/1\n\
+          \ switchport access vlan 40\n switchport mode access\n!\ninterface Ethernet0/2\n\
+          \ switchport access vlan 40\n switchport mode access\n!\ninterface Ethernet0/3\n\
+          \ description to port3.sandbox-backend\n no switchport\n vrf forwarding\
+          \ Mgmt-intf\n ip address 10.10.20.174 255.255.255.0\n!\nip forward-protocol\
+          \ nd\n!\n!\nip http server\nip http secure-server\nip ssh bulk-mode 131072\n\
+          ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr\nip\
+          \ ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr\nip route\
+          \ vrf Mgmt-intf 0.0.0.0 0.0.0.0 10.10.20.254\n!\n!\n!\n!\n!\n!\ncontrol-plane\n\
+          !\n!\n!\nline con 0\n exec-timeout 0 0\n logging synchronous\nline aux 0\n\
+          line vty 0 4\n exec-timeout 0 0\n login local\n transport input telnet ssh\n\
+          !\n!\nend"
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: SW2
+    node_definition: ioll2-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 120
+    y: 0
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        slot: 3
+        type: physical
+      - id: i5
+        label: Ethernet1/0
+        slot: 4
+        type: physical
+      - id: i6
+        label: Ethernet1/1
+        slot: 5
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname PC1
+          # configurable user account
+          USERNAME=cisco
+          PASSWORD=cisco
+          ifconfig eth1 10.10.20.177 netmask 255.255.255.0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: PC1
+    node_definition: desktop
+    parameters: {}
+    ram: 1024
+    tags: []
+    x: -280
+    y: 160
+    interfaces:
+      - id: i0
+        label: eth0
+        slot: 0
+        type: physical
+      - id: i1
+        label: eth1
+        slot: 1
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: iosxe_config.txt
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname Server1
+          # configurable user account
+          USERNAME=cisco
+          PASSWORD=cisco
+          # no password for tc user by default
+          TC_PASSWORD=
+          ifconfig eth1 10.10.20.175 netmask 255.255.255.0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: Server1
+    node_definition: server
+    parameters: {}
+    ram: 256
+    tags: []
+    x: 40
+    y: 160
+    interfaces:
+      - id: i0
+        label: eth0
+        slot: 0
+        type: physical
+      - id: i1
+        label: eth1
+        slot: 1
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: "Building configuration...\n\nCurrent configuration : 3666 bytes\n\
+          !\n! Last configuration change at 01:26:32 UTC Thu Oct 10 2024\n!\nversion\
+          \ 17.12\nservice timestamps debug datetime msec\nservice timestamps log\
+          \ datetime msec\n!\nhostname R1\n!\nboot-start-marker\nboot-end-marker\n\
+          !\n!\nvrf definition Mgmt-intf\n !\n address-family ipv4\n exit-address-family\n\
+          !\nno logging console\nno aaa new-model\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\
+          !\n!\n!\nip domain name virl.info\nip cef\nlogin on-success log\nno ipv6\
+          \ cef\n!\n!\n!\n!\n!\n!\n!\n!\nmultilink bundle-name authenticated\n!\n\
+          !\ncrypto pki trustpoint TP-self-signed-131184641\n enrollment selfsigned\n\
+          \ subject-name cn=IOS-Self-Signed-Certificate-131184641\n revocation-check\
+          \ none\n rsakeypair TP-self-signed-131184641\n hash sha256\n!\n!\ncrypto\
+          \ pki certificate chain TP-self-signed-131184641\n certificate self-signed\
+          \ 01\n  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030\n\
+          \  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967 6E65642D 43657274\n\
+          \  69666963 6174652D 31333131 38343634 31301E17 0D323431 30303931 37323934\n\
+          \  315A170D 33343130 30393137 32393431 5A303031 2E302C06 03550403 0C25494F\n\
+          \  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3133 31313834\n\
+          \  36343130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02\n\
+          \  82010100 D0E0D11B D2C5FF58 2D245289 5DE8E347 7E5C4B55 2B3ACDDF 87678319\n\
+          \  2193EBE3 83A40243 3112458B 075843B0 6C095D2C 91520EB1 C5EAF8C4 2ABFE350\n\
+          \  4DDED528 148DAA92 CB7AE1E8 F73FE1A2 A8A2585F 6C275332 EC2AD44E 109DC365\n\
+          \  9CAD7877 2C826CC3 630E61FE 1BD60B9E 1BC2CF2E 165F15D1 931657AE 6A289777\n\
+          \  017433C8 0C0CF022 13AF1A59 BF64BBAA 9EE926E8 E680CC53 C8958F3D C56DD640\n\
+          \  961D1208 01633827 34219EF1 32D90D6D B24C8431 EDF864B6 C6DE585B EED6DF35\n\
+          \  137C18B0 7A20FDEF 8A4B05FC 09ECFB1B 6E1D5CDA 28B4AD07 7483A9C7 D83CD4DC\n\
+          \  0887F551 F0554C03 621286D4 22B6DB5C 7F418F11 CF432AB5 C5E248C6 FF142E0C\n\
+          \  48633615 02030100 01A35330 51301D06 03551D0E 04160414 1469F8FA 4C49C577\n\
+          \  294E2BE9 5026314C DB0C3DF3 301F0603 551D2304 18301680 141469F8 FA4C49C5\n\
+          \  77294E2B E9502631 4CDB0C3D F3300F06 03551D13 0101FF04 05300301 01FF300D\n\
+          \  06092A86 4886F70D 01010B05 00038201 0100CCAE AC03F27A 051543F1 2E092351\n\
+          \  7050AA48 985DE633 DC68C572 99F490C9 5A67FEC8 98DEC65D F9250F7B AE4FF0E9\n\
+          \  0970A003 45D5CF76 4C9B1E3C 13776C1D 215FCAF0 D8046470 C5D60754 380693E2\n\
+          \  19EB849E 97FABBA4 7B7D1C52 0D8D97EB 5D8A0617 CB0601CC AB3B2D93 E5761608\n\
+          \  5E1EF047 8C31A436 9F29C3AD EA451790 BEBC66EC 004310A8 EA6A88AD DA9FF47D\n\
+          \  05756477 8780A49A FF310D68 55188F9B BBCE19B6 71BF492B E0329EB2 4F5BD91B\n\
+          \  A6505C16 68B6E97D 4B1CE826 B451176D 7F49D62B 64423770 AAE5DAB4 33BFF9B3\n\
+          \  7B6CD073 56ACA23F 4FCF7F63 BB0E6F2C 8A6018FF B9A611B8 F7BAAB0E D5BA1F7B\n\
+          \  98527CAC B56E1D6F 12481889 0A5F2BA5 EDA3\n  \tquit\n!\n!\nmemory free\
+          \ low-watermark processor 81225\n!\n!\nspanning-tree mode rapid-pvst\n!\n\
+          enable password cisco\n!\nusername cisco password 0 cisco\nusername admin\
+          \ password 0 15 admin\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\
+          !\n!\n!\n!\n!\ninterface Ethernet0/0\n ip address 10.10.10.100 255.255.255.0\n\
+          !\ninterface Ethernet0/1\n ip address 1.1.1.1 255.255.255.0\n!\ninterface\
+          \ Ethernet0/2\n description to port1.sandbox-backend\n vrf forwarding Mgmt-intf\n\
+          \ ip address 10.10.20.171 255.255.255.0\n no mop enabled\n no mop sysid\n\
+          !\ninterface Ethernet0/3\n no ip address\n shutdown\n!\nip forward-protocol\
+          \ nd\n!\n!\nip http server\nip http secure-server\nip route 20.20.20.0 255.255.255.0\
+          \ 1.1.1.2\nip route vrf Mgmt-intf 0.0.0.0 0.0.0.0 10.10.20.254\nip ssh bulk-mode\
+          \ 131072\nip ssh server algorithm authentication password\n!\n!\n!\n!\n\
+          !\ncontrol-plane\n!\n!\n!\nline con 0\n exec-timeout 0 0\n password cisco\n\
+          \ logging synchronous\n stopbits 1\nline aux 0\nline vty 0 4\n exec-timeout\
+          \ 0 0\n password cisco\n login local\n transport input telnet ssh\n!\n!\n\
+          !\n!\nend"
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: R1
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: -200
+    y: -160
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: ios_config.txt
+        content: "Building configuration...\n\nCurrent configuration : 3631 bytes\n\
+          !\n! Last configuration change at 01:26:36 UTC Thu Oct 10 2024\n!\nversion\
+          \ 17.12\nservice timestamps debug datetime msec\nservice timestamps log\
+          \ datetime msec\n!\nhostname R2\n!\nboot-start-marker\nboot-end-marker\n\
+          !\n!\nvrf definition Mgmt-intf\n !\n address-family ipv4\n exit-address-family\n\
+          !\nno logging console\nno aaa new-model\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n\
+          !\n!\n!\nip domain name virl.info\nip cef\nlogin on-success log\nno ipv6\
+          \ cef\n!\n!\n!\n!\n!\n!\n!\n!\nmultilink bundle-name authenticated\n!\n\
+          !\ncrypto pki trustpoint TP-self-signed-131184642\n enrollment selfsigned\n\
+          \ subject-name cn=IOS-Self-Signed-Certificate-131184642\n revocation-check\
+          \ none\n rsakeypair TP-self-signed-131184642\n hash sha256\n!\n!\ncrypto\
+          \ pki certificate chain TP-self-signed-131184642\n certificate self-signed\
+          \ 01\n  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030\n\
+          \  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967 6E65642D 43657274\n\
+          \  69666963 6174652D 31333131 38343634 32301E17 0D323431 30303931 37323934\n\
+          \  345A170D 33343130 30393137 32393434 5A303031 2E302C06 03550403 0C25494F\n\
+          \  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3133 31313834\n\
+          \  36343230 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02\n\
+          \  82010100 D7433C05 92735565 52DDFF41 9BAE7174 012E432F 03CD0AB3 9BF1E1E3\n\
+          \  793A7BDD 1163BDED 17FB212D 0F0E0094 5CEA1BAF 6F4B4C6D 9C9BE9A3 CDCF2EB5\n\
+          \  4E3C211F 6D946226 EB03A1F9 E1A39806 592AFE05 20801F71 A0A64F38 81949DA2\n\
+          \  B28FF47F D341A1AE 12ABB610 EA70D7B7 E62367D0 BC79AE71 538CF6C2 8A771310\n\
+          \  D20504A8 3C346542 C96F4D83 DE7B80C6 6FCB6028 FB61952C ABCBEDE4 FF506C48\n\
+          \  D18DA942 7C99189C 4E280063 42D74696 2F3F3775 76BA7436 14E5CCA0 783A160F\n\
+          \  E719F162 EA2C5678 79A749AB 8EC86613 A6E3A6A3 3E2C9B4E 54519CB6 25FA9F6E\n\
+          \  8644815E E000E0F8 4840FC02 E2E5CD50 E2F27D88 8AB9C8B0 97D97314 6CF6DBAE\n\
+          \  011B0F29 02030100 01A35330 51301D06 03551D0E 04160414 A5138F07 13DB69DE\n\
+          \  97F50D83 66BCD9CD 914BC4E6 301F0603 551D2304 18301680 14A5138F 0713DB69\n\
+          \  DE97F50D 8366BCD9 CD914BC4 E6300F06 03551D13 0101FF04 05300301 01FF300D\n\
+          \  06092A86 4886F70D 01010B05 00038201 01003582 2442D7CB F69F7D47 CD4C80CE\n\
+          \  2F45E511 EF496F1F 23D93CB8 8CA8AFBE 40E74D01 D4B0590B A9F79FE3 4AB1E1C5\n\
+          \  CAA21668 81BAB140 FB747435 DED2B97C 8EED30F5 652A822F 0F12E0B0 32E1E034\n\
+          \  46264104 D424576F EF1F7E4B EAF8DBDC 96DC21E8 6C5F2265 3D879715 A2C23092\n\
+          \  5D50E767 FB9D8EC8 E29C9D9D 9C92A94A F60469F4 9BE5711E 1C8997B0 119CCBF1\n\
+          \  8FF831A6 C5BE858E 253CBFBB FECBDC0C E568804C E6D60C5F EE01205D 110D9C6A\n\
+          \  B86D7D85 BB8A0F19 8B19DC3F F4D0D11F 14F15EC5 924F09FA 953238B5 A0C7BDCA\n\
+          \  7BC93181 B5AC1E93 F42AFAC3 D789A861 81F4EEFE 9E06F3B7 7A2662D9 A01CCB5F\n\
+          \  71313464 37CE3F55 3D8720CF D7091954 D88D\n  \tquit\n!\n!\nmemory free\
+          \ low-watermark processor 81225\n!\n!\nspanning-tree mode rapid-pvst\n!\n\
+          enable password cisco\n!\nusername cisco password 0 cisco\n!\n!\n!\n!\n\
+          !\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\ninterface Ethernet0/0\n\
+          \ ip address 20.20.20.100 255.255.255.0\n!\ninterface Ethernet0/1\n ip address\
+          \ 1.1.1.2 255.255.255.0\n!\ninterface Ethernet0/2\n description to port1.sandbox-backend\n\
+          \ vrf forwarding Mgmt-intf\n ip address 10.10.20.172 255.255.255.0\n no\
+          \ mop enabled\n no mop sysid\n!\ninterface Ethernet0/3\n no ip address\n\
+          \ shutdown\n!\nip forward-protocol nd\n!\n!\nip http server\nip http secure-server\n\
+          ip route 10.10.10.0 255.255.255.0 1.1.1.1\nip route vrf Mgmt-intf 0.0.0.0\
+          \ 0.0.0.0 10.10.20.254\nip ssh bulk-mode 131072\nip ssh server algorithm\
+          \ authentication password\n!\n!\n!\n!\n!\ncontrol-plane\n!\n!\n!\nline con\
+          \ 0\n exec-timeout 0 0\n password cisco\n logging synchronous\n stopbits\
+          \ 1\nline aux 0\nline vty 0 4\n exec-timeout 0 0\n password cisco\n login\
+          \ local\n transport input telnet ssh\n!\n!\n!\n!\nend"
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: R2
+    node_definition: iol-xe
+    parameters: {}
+    ram: null
+    tags: []
+    x: 120
+    y: -160
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        label: Ethernet0/0
+        slot: 0
+        type: physical
+      - id: i2
+        label: Ethernet0/1
+        slot: 1
+        type: physical
+      - id: i3
+        label: Ethernet0/2
+        slot: 2
+        type: physical
+      - id: i4
+        label: Ethernet0/3
+        slot: 3
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: ext-conn-0
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: -680
+    y: -160
+    interfaces:
+      - id: i0
+        label: port
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: node.cfg
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname PC2
+          # configurable user account
+          USERNAME=cisco
+          PASSWORD=cisco
+          ifconfig eth1 10.10.20.178 netmask 255.255.255.0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: PC2
+    node_definition: desktop
+    parameters: {}
+    ram: 1024
+    tags: []
+    x: -120
+    y: 160
+    interfaces:
+      - id: i0
+        label: eth0
+        slot: 0
+        type: physical
+      - id: i1
+        label: eth1
+        slot: 1
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: iosxe_config.txt
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname Server2
+          # configurable user account
+          USERNAME=cisco
+          PASSWORD=cisco
+          # no password for tc user by default
+          TC_PASSWORD=
+          ifconfig eth1 10.10.20.176 netmask 255.255.255.0
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n8
+    image_definition: null
+    label: Server2
+    node_definition: server
+    parameters: {}
+    ram: 256
+    tags: []
+    x: 200
+    y: 160
+    interfaces:
+      - id: i0
+        label: eth0
+        slot: 0
+        type: physical
+      - id: i1
+        label: eth1
+        slot: 1
+        type: physical
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n9
+    image_definition: null
+    label: unmanaged-switch-0
+    node_definition: unmanaged_switch
+    parameters: {}
+    ram: null
+    tags: []
+    x: -520
+    y: -160
+    interfaces:
+      - id: i0
+        label: port0
+        slot: 0
+        type: physical
+      - id: i1
+        label: port1
+        slot: 1
+        type: physical
+      - id: i2
+        label: port2
+        slot: 2
+        type: physical
+      - id: i3
+        label: port3
+        slot: 3
+        type: physical
+      - id: i4
+        label: port4
+        slot: 4
+        type: physical
+      - id: i5
+        label: port5
+        slot: 5
+        type: physical
+      - id: i6
+        label: port6
+        slot: 6
+        type: physical
+      - id: i7
+        label: port7
+        slot: 7
+        type: physical
+      - id: i8
+        label: port8
+        slot: 8
+        type: physical
+      - id: i9
+        label: port9
+        slot: 9
+        type: physical
+      - id: i10
+        label: port10
+        slot: 10
+        type: physical
+      - id: i11
+        label: port11
+        slot: 11
+        type: physical
+links:
+  - id: l0
+    n1: n0
+    n2: n2
+    i1: i1
+    i2: i0
+    conditioning: {}
+    label: SW1-Ethernet0/0<->PC1-eth0
+  - id: l1
+    n1: n0
+    n2: n7
+    i1: i2
+    i2: i0
+    conditioning: {}
+    label: SW1-Ethernet0/1<->PC2-eth0
+  - id: l2
+    n1: n0
+    n2: n4
+    i1: i3
+    i2: i1
+    conditioning: {}
+    label: SW1-Ethernet0/2<->R1-Ethernet0/0
+  - id: l3
+    n1: n3
+    n2: n1
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: Server1-eth0<->SW2-Ethernet0/0
+  - id: l4
+    n1: n8
+    n2: n1
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: Server2-eth0<->SW2-Ethernet0/1
+  - id: l5
+    n1: n1
+    n2: n5
+    i1: i3
+    i2: i1
+    conditioning: {}
+    label: SW2-Ethernet0/2<->R2-Ethernet0/0
+  - id: l6
+    n1: n5
+    n2: n4
+    i1: i2
+    i2: i2
+    conditioning: {}
+    label: R2-Ethernet0/1<->R1-Ethernet0/1
+  - id: l7
+    n1: n6
+    n2: n9
+    i1: i0
+    i2: i0
+    conditioning: {}
+    label: ext-conn-0-port<->unmanaged-switch-0-port0
+  - id: l8
+    n1: n9
+    n2: n5
+    i1: i1
+    i2: i3
+    conditioning: {}
+    label: unmanaged-switch-0-port1<->R2-Ethernet0/2
+  - id: l9
+    n1: n9
+    n2: n4
+    i1: i2
+    i2: i3
+    conditioning: {}
+    label: unmanaged-switch-0-port2<->R1-Ethernet0/2
+  - id: l10
+    n1: n9
+    n2: n0
+    i1: i3
+    i2: i4
+    conditioning: {}
+    label: unmanaged-switch-0-port3<->SW1-Ethernet0/3
+  - id: l11
+    n1: n9
+    n2: n1
+    i1: i4
+    i2: i4
+    conditioning: {}
+    label: unmanaged-switch-0-port4<->SW2-Ethernet0/3
+  - id: l12
+    n1: n3
+    n2: n9
+    i1: i1
+    i2: i5
+    conditioning: {}
+    label: Server1-eth1<->unmanaged-switch-0-port5
+  - id: l13
+    n1: n2
+    n2: n9
+    i1: i1
+    i2: i6
+    conditioning: {}
+    label: PC1-eth1<->unmanaged-switch-0-port6
+  - id: l14
+    n1: n7
+    n2: n9
+    i1: i1
+    i2: i7
+    conditioning: {}
+    label: PC2-eth1<->unmanaged-switch-0-port7
+  - id: l15
+    n1: n9
+    n2: n8
+    i1: i8
+    i2: i1
+    conditioning: {}
+    label: unmanaged-switch-0-port8<->Server2-eth1
+lab:
+  description: ''
+  notes: |-
+    #Lab guid for configuring Vlans and Routing (CCNA Task 2.1 and 3.1)
+
+    Step 1: Configure the IPs for PCs as 10.10.10.x, that x ist the PC number.
+    Step 2: Configure the IPs for Servers as 10.10.10.y, that y ist the Servers number.
+    Step 3: Configure the Vlans on the Switches, so that only traffic between PC1 and Server2 can be transferred.
+    Step 4: Configure the needed Route and Gateways in routers.
+    Step 5: Check to solve any wrong configuration .
+  title: default-lab
+  version: 0.2.2

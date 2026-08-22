@@ -1,0 +1,161 @@
+# ============================================
+# CONFIGURACIÓN COMPLETA PARA R1
+# ============================================
+
+
+
+
+
+configure terminal
+enable secret cisco
+ip domain name local.com
+hostname R1
+no logging console
+ip cef
+ipv6 unicast-routing
+
+ip dhcp excluded-address 192.168.10.1 192.168.10.10
+ip dhcp excluded-address 192.168.20.1 192.168.20.10
+
+ip dhcp pool VLAN10_A
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+ lease 7
+exit
+
+ip dhcp pool VLAN20_A
+ network 192.168.20.0 255.255.255.0
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+ lease 7
+exit
+
+# ===== DHCP IPv6 =====
+ipv6 dhcp pool VLAN10_EMPRESA
+ address prefix 2001:db8:acad:10::/64 lifetime infinite infinite
+ dns-server 2001:db8:acad:10::A
+exit
+
+ipv6 dhcp pool VLAN20_EMPRESA
+ address prefix 2001:db8:acad:20::/64 lifetime infinite infinite
+ dns-server 2001:db8:acad:20::A
+exit
+
+# ===== USUARIOS =====
+username cisco privilege 15 secret cisco
+crypto key generate rsa modulus 2048
+
+# ===== INTERFACES =====
+interface Ethernet0/0
+ no ip address
+ ip nat inside
+exit
+
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ ip nat inside
+ ip ospf 10 area 0
+ ip access-group 100 in
+ ipv6 address 2001:db8:acad:10::1/64
+ ipv6 address fe80::10 link-local
+ ipv6 nd prefix 2001:db8:acad:10::/64
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 dhcp server VLAN10_EMPRESA
+ ipv6 ospf 10 area 0
+ ipv6 traffic-filter traffic_vlan10_A_vlan30 in
+exit
+
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ ip nat inside
+ ip ospf 10 area 0
+ ipv6 address 2001:db8:acad:20::1/64
+ ipv6 address fe80::20 link-local
+ ipv6 nd prefix 2001:db8:acad:20::/64
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 dhcp server VLAN20_EMPRESA
+ ipv6 ospf 10 area 0
+exit
+
+interface Ethernet0/1
+ ip address 1.1.1.1 255.255.255.0
+ ipv6 address 2001:db8:acad:1::1/64
+ ipv6 address fe80::1 link-local
+ ip nat inside
+ ip ospf 10 area 0
+ ipv6 ospf 10 area 0
+exit
+
+interface Ethernet0/2
+ description to port1.sandbox-backend
+ ip address 10.10.20.171 255.255.255.0
+ ip nat outside
+exit
+
+interface Ethernet0/3
+ no ip address
+ shutdown
+exit
+
+
+# ===== OSPF =====
+router ospf 10
+ router-id 1.1.1.1
+ network 1.1.1.0 0.0.0.255 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ default-information originate
+exit
+
+ipv6 router ospf 10
+ router-id 1.1.1.1
+ default-information originate
+exit
+
+# ===== NAT =====
+ip nat pool PUBLICOS 200.1.1.1 200.1.1.5 netmask 255.255.255.0
+
+ip access-list standard 1
+ permit 192.168.10.0 0.0.0.255
+ permit 192.168.20.0 0.0.0.255
+ permit 192.168.30.0 0.0.0.255
+ permit 192.168.40.0 0.0.0.255
+exit
+
+ip nat inside source list 1 pool PUBLICOS overload
+
+# ===== ACL =====
+ip access-list extended 101
+ deny ip 192.168.10.0 0.0.0.255 192.168.30.0 0.0.0.255
+ permit ip any any
+exit
+
+ipv6 access-list traffic_vlan10_A_vlan30
+ deny ipv6 2001:db8:acad:10::/64 2001:db8:acad:30::/64
+ permit ipv6 any any
+exit
+
+
+
+line con 0
+ exec-timeout 0 0
+ password cisco
+ logging synchronous
+exit
+
+line vty 0 4
+ exec-timeout 0 0
+ password cisco
+ login local
+ transport input ssh
+exit
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+service password-encryption
+end
+copy running-config startup-config
