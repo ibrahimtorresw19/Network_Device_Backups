@@ -1,7 +1,7 @@
 ### 🏢  Network device backups and simple topology (Cisco CML Topology)
 
 Este Laboratorio posee una topologia sencilla simulada en un sandbox de cisco el cual es el laboratorio por
-defecto de (CML), este laboratorio tiene configuracioens adicionales en los dispositivos y con un archivo de automatización 
+defecto de (CML), este laboratorio tiene configuraciones adicionales en los dispositivos y con un archivo de automatización 
 Hecho con python y netmiko para el guardado de la configuracion total de dichos dispositivos.
 
 ---
@@ -21,7 +21,6 @@ Hecho con python y netmiko para el guardado de la configuracion total de dichos 
 
 ### 📊 Topologia de la red 
 
-Esta red esta diseñada con la arquitectura de core colapsado  (Acceso,Distribucion/Core,routers de borde) garantizado tolerancia a fallos.
 
 ![Topología Física](Topologia/topologia_fisica.png)
 
@@ -29,7 +28,7 @@ Esta red esta diseñada con la arquitectura de core colapsado  (Acceso,Distribuc
 
 ## 📂 Estructura del Repositorio
 
-** `Código_Automatización_backups/`: contiene el archivo de python usando netmiko para lanzar el script y el guardado de las configuraciones
+* `Código_Automatización_backups/`: contiene el archivo de python usando netmiko para lanzar el script y el guardado de las configuraciones
     de todos los dispositivos de red de este laboratorio.
 * `configs/`: Contiene los scripts de configuración individual listos para cargar vía consola o SSH en los equipos de CML2.
   * `Sw1.txt`, `Sw2.txt`
