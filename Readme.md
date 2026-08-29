@@ -50,8 +50,7 @@ Hecho con python y netmiko para el guardado de la configuracion total de dichos 
 ---
 
 + ## 🚀 Cómo Ejecutar el Script de Automatización
-+ 
-+ ```bash
+
 + # 1. Instalar Netmiko
 + pip install netmiko
 + 
