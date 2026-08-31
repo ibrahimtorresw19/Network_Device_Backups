@@ -24,6 +24,14 @@ Esta red está diseñada con la arquitectura de core colapsado (Acceso, Distribu
 
 ---
 
+### 🌐 Arquitectura de Red (Plano de Datos y Plano de Gestión)
+
+Esta topología utiliza un **Unmanaged Switch** exclusivamente para la **red de gestión (Out-of-Band Management)**. Todas las interfaces de administración de los dispositivos (R1, R2, SW1, SW2, PCs y Servidores) están conectadas a este switch, el cual asigna las direcciones IP del segmento `10.10.20.0/24` para permitir el acceso remoto seguro vía SSH o Telnet (credenciales cisco/cisco). 
+
+El tráfico de datos de los usuarios viaja de forma totalmente independiente a través de las interfaces físicas dedicadas (segmentos `192.168.x.x` y `1.1.1.x`), garantizando que la administración de los equipos no interfiera con el rendimiento de la red de producción.
+
+---
+
 ## 📂 Estructura del Repositorio
 
 * `Código_Automatización_backups/`: Contiene el script de Python utilizando la librería Netmiko para la ejecución y guardado de las configuraciones de los dispositivos de red.
@@ -57,13 +65,3 @@ python automatizacion_dos.py
 
 # 3. Verificar los backups generados
 ls ~/Desktop/Backup_Dispositivos_Laboratorio/
-```
-
----
-
-## 🔒 Buenas Prácticas y Políticas Aplicadas
-
-Todos los equipos de red en este laboratorio cuentan con las siguientes políticas implementadas de fábrica:
-* Cifrado de contraseñas globales (`service password-encryption`).
-* Secretos de habilitación robustos y autenticación local por SSH (claves RSA de 2048 bits).
-* Banner MOTD de advertencia legal ante accesos no autorizados.
