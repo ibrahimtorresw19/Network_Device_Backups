@@ -1,67 +1,71 @@
-### 🏢 Network Device Backups and Simple Topology (Cisco CML Topology)
+### 🌐 Dual-Stack Enterprise Network (IPv4/IPv6) & Netmiko Automation (Cisco CML)
 
-Este laboratorio posee una topología sencilla simulada en el entorno sandbox por defecto de Cisco Modeling Labs (CML). Los dispositivos cuentan con configuraciones adicionales y un script de automatización desarrollado en Python y Netmiko para el respaldo automático de la configuración global de la infraestructura.
+Este laboratorio implementa una infraestructura empresarial Dual-Stack (IPv4 e IPv6) simulada en Cisco Modeling Labs (CML). Incluye segmentación por VLANs, enrutamiento dinámico OSPFv2/OSPFv3, servicios DHCP/DHCPv6 Stateful, NAT/PAT con Port Forwarding, seguridad en Capa 2/Capa 3 y scripts en Python con Netmiko y TextFSM para el aprovisionamiento de configuraciones y la generación automática de reportes de inventario.
 
 ---
 
 ### 🎯 Objetivos del Laboratorio
 
-- ✅ Segmentar la red en VLANs para separar departamentos.
-- ✅ Implementar enrutamiento OSPF para comunicación entre VLANs.
-- ✅ Configurar Router-on-a-Stick con subinterfaces.
-- ✅ Proveer servicios DHCP y NAT para acceso a internet.
-- ✅ Asegurar los puertos de acceso con Port-Security.
-- ✅ Implementar IPv6 con DHCPv6 y OSPFv3.
-- ✅ Automatizar copias de seguridad (backups) con Python y Netmiko.
+- ✅ Segmentar la red en VLANs (10, 20, 30, 40 y Nativa 90) con Router-on-a-Stick.
+- ✅ Implementar direccionamiento Dual-Stack con DHCPv4, DHCPv6 Stateful y OSPFv2/OSPFv3 en Área 0.
+- ✅ Configurar NAT Overload (PAT) para salida a Internet y NAT estático (Port Forwarding) hacia servidores internos.
+- ✅ Asegurar los puertos de acceso con Port-Security, BPDU Guard y DHCP Snooping.
+- ✅ Filtrar tráfico inter-VLAN mediante ACLs extendidas en IPv4 e IPv6.
+- ✅ Automatizar el despliegue de configuraciones y la extracción de inventario (`.txt` y `.csv`) con Python, Netmiko y TextFSM.
 
 ---
 
 ### 📊 Topología de la Red
 
-Esta red está diseñada con la arquitectura de core colapsado (Acceso, Distribución/Core y Routers de borde) garantizando tolerancia a fallos.
+La topología separa el tráfico de producción (Dual-Stack IPv4/IPv6 entre switches, routers y hosts) de la red de administración dedicada Out-of-Band (OOB).
 
-![Topología Física](Topologia/topologia_logica.png)
+![Topología Lógica](Topologia/topologia_logica.png)
 
 ---
 
 ### 🌐 Arquitectura de Red (Plano de Datos y Plano de Gestión)
 
-Esta topología utiliza un **Unmanaged Switch** exclusivamente para la **red de gestión (Out-of-Band Management)**. Todas las interfaces de administración de los dispositivos (R1, R2, SW1, SW2, PCs y Servidores) están conectadas a este switch, el cual asigna las direcciones IP del segmento `10.10.20.0/24` para permitir el acceso remoto seguro vía SSH o Telnet (credenciales cisco/cisco). 
+Esta topología utiliza un **Unmanaged Switch** exclusivamente para la **red de gestión (Out-of-Band Management)**. Las interfaces de administración de los equipos de red (`R1`, `R2`, `SW1` y `SW2`) están conectadas a este switch dentro del segmento `10.10.20.0/24` (`10.10.20.171` a `.174`), permitiendo el acceso remoto seguro exclusivamente vía **SSHv2** (credenciales `cisco`/`cisco`).
 
-El tráfico de datos de los usuarios viaja de forma totalmente independiente a través de las interfaces físicas dedicadas (segmentos `192.168.x.x` y `1.1.1.x`), garantizando que la administración de los equipos no interfiera con el rendimiento de la red de producción.
+El tráfico de datos de usuarios y servidores viaja de forma totalmente independiente a través de las interfaces dedicadas (segmentos `192.168.x.x`, `2001:db8:acad::/48` y el enlace WAN `10.0.12.0/30`), garantizando que las tareas de administración y automatización no interfieran con la red de producción.
 
 ---
 
 ## 📂 Estructura del Repositorio
 
-* `Código_Automatización_backups/`: Contiene el script de Python utilizando la librería Netmiko para la ejecución y guardado de las configuraciones de los dispositivos de red.
-* `configs/`: Contiene los archivos de configuración individual listos para cargar vía consola o SSH en los equipos de CML2.
-  * `Sw1.txt`, `Sw2.txt`
+* `Automatizacion/`: Scripts desarrollados en Python con Netmiko:
+  * `read_file.py`: Automatiza la lectura y el envío de bloques de configuración desde archivos `.txt` hacia los dispositivos.
+  * `device_information.py`: Extrae versión de IOS y estado de interfaces mediante TextFSM y exporta reportes estructurados.
+* `Configuraciones/`: Archivos de configuración individual listos para cargar en los nodos de CML:
   * `R1.txt`, `R2.txt`
-  * `Host.txt`
-* `Notas/`: Explicación detallada de las configuraciones aplicadas en los dispositivos.
-* `Topologia/`: Imágenes de la topología en ejecución dentro del simulador.
+  * `Sw1.txt`, `Sw2.txt`
+  * `Host.txt` (Scripts de configuración IPv4/IPv6 para clientes `udhcpc`/`udhcpc6` y servidores).
+* `Notas/`: Documentación técnica detallada de direccionamiento, políticas y configuraciones (`Notas.md`).
+* `Reportes/`: Archivos generados automáticamente por el script de inventario (`reporte_inventario.txt` y `reporte_inventario.csv`).
+* `Topologia/`: Diagrama lógico de la infraestructura (`topologia_logica.png`).
 
 ---
 
 ## 🛠️ Requisitos en los Dispositivos de Red
 
-* **SSH Habilitado**: Netmiko utiliza SSH por defecto; Telnet no se recomienda por razones de seguridad.
-* **Usuario Local**: Cuenta con credenciales válidas creadas de forma local en el dispositivo o en un servidor AAA.
-* **Privilegios de Lectura**: El usuario requiere un nivel de privilegio suficiente para ejecutar comandos `show` (ej. Nivel 1 o superior en Cisco).
-* **Contraseña de Enable**: Requerida si el usuario no ingresa directamente al modo privilegiado al iniciar sesión.
-* **Llaves Criptográficas**: SSH requiere que el dispositivo tenga generado su par de llaves RSA (mínimo 1024 bits).
+* **SSHv2 Habilitado**: Telnet está deshabilitado (`transport input ssh`) por seguridad; Netmiko se conecta mediante SSH en el puerto 22.
+* **Usuario Local**: Cuenta con credenciales válidas (`cisco`) y nivel de privilegio 15.
+* **Contraseña de Enable**: Configurada (`enable secret cisco`) para ejecutar comandos de configuración y diagnóstico.
+* **Llaves Criptográficas**: Par de llaves RSA de 2048 bits generado en cada equipo.
 
 ---
 
-## 🚀 Cómo Ejecutar el Script de Automatización
+## 🚀 Cómo Ejecutar los Scripts de Automatización
 
 ```bash
-# 1. Instalar Netmiko
-pip install netmiko
+# 1. Instalar las dependencias necesarias
+pip install netmiko tabulate
 
-# 2. Ejecutar el script
-python automatizacion_dos.py
+# 2. Aprovisionar configuración en un dispositivo (ej. R1)
+python read_file.py
 
-# 3. Verificar los backups generados
-ls ~/Desktop/Backup_Dispositivos_Laboratorio/
+# 3. Recolectar inventario de todos los equipos (R1, R2, SW1, SW2)
+python device_information.py
+
+# 4. Verificar los reportes generados
+ls ../Reportes/
