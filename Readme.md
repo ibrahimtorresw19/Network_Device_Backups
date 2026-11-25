@@ -20,7 +20,7 @@ Este laboratorio posee una topología sencilla simulada en el entorno sandbox po
 
 Esta red está diseñada con la arquitectura de core colapsado (Acceso, Distribución/Core y Routers de borde) garantizando tolerancia a fallos.
 
-![Topología Física](Topologia/topologia_fisica.png)
+![Topología Física](Topologia/topologia_logica.png)
 
 ---
 
