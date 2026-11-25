@@ -157,13 +157,23 @@ Esta red está diseñada con una arquitectura modular de acceso y enrutamiento D
 **Guardado de Configuración:**
 - ✅ Configuración guardada en NVRAM (`copy running-config startup-config`)
 
----
+================================================================================
+### SCRIPT DE BACKUP AUTOMATIZADO PARA DISPOSITIVOS DE RED (`automatizacion_dos.py`)
+================================================================================
 
-## 🐍 Scripts de Automatización (Python + Netmiko)
+OBJETIVO PRINCIPAL:
+    Realizar copias de seguridad (backups) de la running-config de todos los
+    dispositivos de red del laboratorio (R1, R2, SW1, SW2: 10.10.20.171 - .174)
+    de forma automática y organizarlos en carpetas por fecha UTC.
 
-1. **Aprovisionamiento de Configuración (`read_file.py`):**
-   - Lee archivos de configuración plana (`R1.txt`), filtra líneas en blanco y comentarios (`!`), y despliega los comandos vía SSH usando `send_config_set()`.
-2. **Recolección de Inventario (`device_information.py`):**
-   - Se conecta vía SSH a los 4 dispositivos (`10.10.20.171` – `10.10.20.174`).
-   - Ejecuta `show version` y `show interface` aplicando plantillas **TextFSM** para estructurar los datos (versión de IOS, interfaces, descripciones, direcciones IP, direcciones MAC y estado físico/lógico).
-   - Imprime tablas formateadas en consola mediante `tabulate` y exporta los reportes `reporte_inventario.txt` y `reporte_inventario.csv` en la carpeta `Reportes/`.
+FUNCIONAMIENTO DEL SCRIPT:
+    - Detecta dinámicamente el hostname de cada equipo mediante find_prompt().
+    - Ejecuta el comando 'sh run' vía SSH (puerto 22) en modo privilegiado.
+    - Crea la estructura ~/Desktop/Backup_Dispositivos_Laboratorio/YYYY-MM-DD/.
+    - Guarda cada respaldo con el formato {hostname}__{ip}_config.txt.
+
+TECNOLOGÍAS UTILIZADAS:
+    - Python 3: Lenguaje de programación
+    - Netmiko: Biblioteca para conexiones SSH a dispositivos Cisco IOS
+    - OS: Para creación dinámica de directorios y manejo de rutas
+    - Datetime (UTC): Para organizar los respaldos diarios por fecha
